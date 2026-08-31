@@ -8,6 +8,7 @@
 ## 🌟 Overview
 
 **Ecomart** is a high-end, production-grade sustainable e-commerce marketplace engineered for conscious pioneers. The platform bridges **closed-loop environmental accounting** with **futuristic cyberpunk-organic aesthetics**, featuring dynamic telemetry, real-time lifecycle carbon tracking, interactive data visualizations, and an audited catalog of 12 zero-waste essentials.
+Live Link :https://unique-belekoy-3396fe.netlify.app
 
 ---
 
