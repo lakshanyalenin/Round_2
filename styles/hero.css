@@ -1,0 +1,525 @@
+/* ==========================================================================
+   ECOMART — Hero, Benefits & Platform 12 Section Styles
+   ========================================================================== */
+
+/* Hero Section */
+.hero-section {
+  padding: 60px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.hero-tag {
+  align-self: flex-start;
+}
+
+.hero-headline {
+  margin-top: -6px;
+}
+
+.hero-description {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 580px;
+}
+
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* Live Cyber-Eco Status Ticker */
+.hero-ticker-wrapper {
+  margin-top: 18px;
+  padding: 14px 20px;
+  background: rgba(0, 255, 136, 0.04);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ticker-pulse-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--accent-neon);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-neon);
+  animation: pulseDot 1.8s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.4; }
+}
+
+.ticker-text {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ticker-text span {
+  color: var(--accent-neon-bright);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Hero Featured Product Card (HUD / Cyber Data Panel)
+   ========================================================================== */
+.hero-product-showcase {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-product-card {
+  width: 100%;
+  max-width: 460px;
+  background: linear-gradient(160deg, rgba(14, 30, 20, 0.92) 0%, rgba(8, 16, 11, 0.95) 100%);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(0, 255, 136, 0.12);
+  position: relative;
+  overflow: hidden;
+  animation: floatCard 6s ease-in-out infinite alternate;
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+.hero-product-card:hover {
+  border-color: var(--accent-neon);
+  box-shadow: var(--shadow-lg), 0 0 50px rgba(0, 255, 136, 0.25);
+}
+
+@keyframes floatCard {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-10px) rotate(0.6deg); }
+}
+
+/* Scanline / Grid HUD Overlay */
+.hero-product-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 255, 136, 0.02) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-co2-badge {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-co2-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero-co2-value {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--accent-neon-bright);
+  text-shadow: 0 0 16px rgba(0, 255, 136, 0.5);
+}
+
+.hero-hud-id {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-neon);
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid var(--border-subtle);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* Image Container */
+.hero-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 310px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(0, 255, 136, 0.12) 0%, rgba(5, 15, 10, 0.8) 70%);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 20px;
+  z-index: 2;
+}
+
+.hero-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-product-card:hover .hero-card-img {
+  transform: scale(1.06);
+}
+
+/* Telemetry Micro Tags */
+.hero-telemetry-tags {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 3;
+}
+
+.telemetry-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  background: rgba(4, 10, 7, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 3px 8px;
+  color: var(--text-secondary);
+  backdrop-filter: blur(8px);
+}
+
+/* Card Body Details */
+.hero-card-details {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.hero-card-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.hero-card-price {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--accent-neon);
+}
+
+.hero-card-subinfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.hero-card-replaces {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.hero-card-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   Sustainability Benefits (3 Cards)
+   ========================================================================== */
+.benefits-section {
+  padding: 30px 0 70px;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.benefit-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.benefit-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-bright);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(0, 255, 136, 0.15);
+}
+
+.benefit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-neon), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.benefit-card:hover::before {
+  opacity: 1;
+}
+
+.benefit-icon-wrapper {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-neon);
+  box-shadow: 0 0 16px rgba(0, 255, 136, 0.1);
+  transition: all var(--transition-fast);
+}
+
+.benefit-card:hover .benefit-icon-wrapper {
+  background: var(--accent-neon);
+  color: #031207;
+  box-shadow: 0 0 20px var(--accent-neon);
+}
+
+.benefit-icon-svg {
+  width: 26px;
+  height: 26px;
+}
+
+.benefit-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.benefit-description {
+  font-size: 0.94rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.benefit-footer-metric {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-neon);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   Platform 12 Section (Low Waste Express & Live Countdown)
+   ========================================================================== */
+.platform-section {
+  padding: 40px 0 80px;
+}
+
+.platform-banner {
+  background: linear-gradient(135deg, rgba(14, 30, 20, 0.95) 0%, rgba(6, 15, 10, 0.98) 100%);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 44px 48px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(0, 255, 136, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.platform-banner::before {
+  content: 'PLATFORM 12';
+  position: absolute;
+  right: 20px;
+  bottom: -25px;
+  font-family: var(--font-display);
+  font-size: 6rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.02);
+  letter-spacing: -0.05em;
+  pointer-events: none;
+}
+
+.platform-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.platform-badge {
+  align-self: flex-start;
+}
+
+.platform-title {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.platform-offer {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  color: var(--accent-neon);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.platform-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 520px;
+}
+
+/* Digital Countdown Container */
+.platform-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 22px;
+}
+
+.countdown-box {
+  background: rgba(4, 10, 7, 0.85);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-md);
+  padding: 20px 28px;
+  box-shadow: var(--shadow-glow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.countdown-label {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.countdown-digits {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.digit-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.digit-value {
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 4px 10px;
+  min-width: 54px;
+  text-align: center;
+  text-shadow: 0 0 12px rgba(0, 255, 136, 0.4);
+}
+
+.digit-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-neon);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.digit-divider {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  color: var(--accent-neon);
+  margin-top: -18px;
+}
+
+.platform-cta-btn {
+  font-size: 1.05rem;
+  padding: 16px 36px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero-product-showcase {
+    justify-content: flex-start;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-banner {
+    grid-template-columns: 1fr;
+    padding: 32px 28px;
+  }
+
+  .platform-right {
+    align-items: flex-start;
+  }
+}

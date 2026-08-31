@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecomart — Futuristic Sustainable Marketplace</title>
+  <meta name="description" content="Ecomart is a premium eco-conscious sustainable marketplace blending dark emerald futurism with cyber-tech design. Shop verified 5-leaf scored eco products with carbon-neutral delivery." />
+  <meta name="theme-color" content="#060B08" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/navbar.css" />
+  <link rel="stylesheet" href="styles/hero.css" />
+  <link rel="stylesheet" href="styles/shop.css" />
+  <link rel="stylesheet" href="styles/impact.css" />
+  <link rel="stylesheet" href="styles/about.css" />
+  <link rel="stylesheet" href="styles/cursor.css" />
+</head>
+<body>
+
+  <!-- Custom Botanical Leaf Cursor -->
+  <div id="custom-cursor-follower" class="custom-cursor-follower">
+    <svg class="cursor-leaf-svg" viewBox="0 0 24 24">
+      <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/>
+    </svg>
+  </div>
+  <div id="cursor-trail-dot" class="cursor-trail-dot"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Global Site Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav-wrapper" aria-label="Main Navigation">
+        <!-- Brand Logo -->
+        <a href="#home" class="brand-logo" data-target="home">
+          <div class="brand-icon-wrapper">
+            <svg class="brand-leaf-svg" viewBox="0 0 24 24">
+              <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/>
+            </svg>
+          </div>
+          <span class="brand-text">ECOMART</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active" data-target="home">Home</a></li>
+          <li><a href="shop.html" class="nav-link" data-target="shop">Shop</a></li>
+          <li><a href="impact.html" class="nav-link" data-target="impact">Impact</a></li>
+          <li><a href="about.html" class="nav-link" data-target="about">About</a></li>
+        </ul>
+
+        <!-- Nav Actions -->
+        <div class="nav-actions">
+          <!-- Search Product Trigger -->
+          <button id="search-trigger-btn" class="search-trigger-btn" aria-label="Search Products">
+            <svg style="width: 17px; height: 17px; fill: currentColor;" viewBox="0 0 24 24">
+              <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+            <span class="search-label">Search Product</span>
+            <span class="search-kbd">/</span>
+          </button>
+
+          <!-- Audio SFX Toggle -->
+          <button id="sfx-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Audio Feedback" title="Enable Cyber-Chimes">
+            <svg style="width: 20px; height: 20px; fill: var(--text-muted);" viewBox="0 0 24 24">
+              <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+            </svg>
+          </button>
+
+          <!-- Theme Toggle -->
+          <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+            <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24">
+              <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1z"/>
+            </svg>
+          </button>
+
+          <!-- Cart Trigger Button -->
+          <button id="cart-trigger-btn" class="cart-trigger-btn" aria-label="Open Cart">
+            <svg class="cart-leaf-icon" style="width: 19px; height: 19px; fill: var(--accent-neon);" viewBox="0 0 24 24">
+              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+            <span>Cart</span>
+            <span id="cart-badge" class="cart-badge">1</span>
+          </button>
+
+          <!-- Mobile Hamburger -->
+          <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle mobile menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+      <ul class="mobile-nav-links">
+        <li><a class="mobile-nav-link active" data-target="home">Home</a></li>
+        <li><a class="mobile-nav-link" data-target="shop">Shop Marketplace</a></li>
+        <li><a class="mobile-nav-link" data-target="impact">Impact & Metrics</a></li>
+        <li><a class="mobile-nav-link" data-target="about">Sustainability Philosophy</a></li>
+      </ul>
+      <button class="btn btn-primary" style="margin-top: auto;" onclick="window.ecomartStore.setActiveTab('shop')">
+        Explore Products
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       VIEW: HOME PAGE
+       ========================================================================== -->
+  <main id="view-home" class="view-section">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Left Hero Content -->
+          <div class="hero-content">
+            <span class="badge badge-neon hero-tag">
+              🌱 Verified 5-Leaf Eco Platform
+            </span>
+            <div class="hero-headline">
+              <h1 class="hero-title">
+                Shop Better<br />
+                <span class="hero-title-highlight">Live Sustainably</span>
+              </h1>
+            </div>
+            <p class="hero-description">
+              Ecomart helps modern pioneers make sustainable everyday swaps without compromising style, quality, or convenience. Every product is audited, 5-leaf scored, and delivered 100% carbon-neutral.
+            </p>
+            <div class="hero-cta-group">
+              <button id="hero-explore-btn" class="btn btn-primary btn-pill">
+                Explore Marketplace →
+              </button>
+              <button id="hero-impact-btn" class="btn btn-secondary btn-pill">
+                View Live Impact
+              </button>
+            </div>
+
+            <!-- Live Status Ticker -->
+            <div class="hero-ticker-wrapper">
+              <div class="ticker-pulse-dot"></div>
+              <div class="ticker-text">
+                <span>142,890+</span> single-use items replaced • <span>100%</span> solar fulfillment • <span>0%</span> virgin plastic
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Hero Product Showcase (HUD / Data Panel) -->
+          <div class="hero-product-showcase">
+            <div class="hero-product-card">
+              <!-- Top HUD Info -->
+              <div class="hero-card-header">
+                <div class="hero-co2-badge">
+                  <span class="hero-co2-label">CO₂ Saved</span>
+                  <span class="hero-co2-value">24,580 kg</span>
+                </div>
+                <span class="hero-hud-id">#SS-304-ECO</span>
+              </div>
+
+              <!-- Product Image -->
+              <div class="hero-img-wrapper">
+                <img class="hero-card-img" src="assets/images/insulated_steel_bottle.jpg" alt="Insulated Steel Bottle" />
+                <div class="hero-telemetry-tags">
+                  <span class="telemetry-tag">TEMP_HOLD: 24H</span>
+                  <span class="telemetry-tag">REPLACES: 150 BOTTLES</span>
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="hero-card-details">
+                <div class="hero-card-title-row">
+                  <h3 class="hero-card-title">Insulated Steel Bottle</h3>
+                  <div class="hero-card-price">$24</div>
+                </div>
+                <div class="hero-card-subinfo">
+                  <span class="hero-card-replaces">Replaces 150 single-use bottles/yr</span>
+                  <div class="leaf-rating">
+                    <svg class="leaf-icon active" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/></svg>
+                    <svg class="leaf-icon active" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/></svg>
+                    <svg class="leaf-icon active" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/></svg>
+                    <svg class="leaf-icon active" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/></svg>
+                    <svg class="leaf-icon active" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/></svg>
+                    <span class="leaf-rating-label">5-Leaf Rated</span>
+                  </div>
+                </div>
+
+                <div class="hero-card-actions">
+                  <button id="hero-card-add-btn" class="btn btn-primary">
+                    Quick Add to Cart
+                  </button>
+                  <button id="hero-card-inspect-btn" class="btn btn-secondary btn-icon" title="Inspect Specifications">
+                    <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24">
+                      <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sustainability Benefits (3 Cards) -->
+    <section class="benefits-section">
+      <div class="container">
+        <div class="benefits-grid">
+          <!-- Card 1 -->
+          <div class="benefit-card">
+            <div class="benefit-icon-wrapper">
+              <svg class="benefit-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            </div>
+            <h3 class="benefit-title">Plastic-Free Packaging</h3>
+            <p class="benefit-description">
+              Every shipment is enclosed in 100% backyard-compostable unbleached kraft cardstock, mushroom mycelium foam, and water-activated sealing tape. Zero virgin plastic polymers.
+            </p>
+            <div class="benefit-footer-metric">
+              <span>✓ 90-Day Soil Biodegradation</span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="benefit-card">
+            <div class="benefit-icon-wrapper">
+              <svg class="benefit-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                <path d="M2 12h20"></path>
+              </svg>
+            </div>
+            <h3 class="benefit-title">Carbon-Neutral Delivery</h3>
+            <p class="benefit-description">
+              We eliminate last-mile transport emissions through intelligent EV routing and verified reforestation offsets with certified climate partners across endangered habitats.
+            </p>
+            <div class="benefit-footer-metric">
+              <span>✓ 100% Net Zero Route Coverage</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="benefit-card">
+            <div class="benefit-icon-wrapper">
+              <svg class="benefit-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+            <h3 class="benefit-title">Verified 5-Leaf Scores</h3>
+            <p class="benefit-description">
+              Our transparent lifecycle assessment (LCA) analyzes raw material ethics, circular design, and durability before any product is approved for our digital catalog.
+            </p>
+            <div class="benefit-footer-metric">
+              <span>✓ Rigorous Multi-Tier Eco Audit</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform 12 Section -->
+    <section class="platform-section">
+      <div class="container">
+        <div class="platform-banner">
+          <div class="platform-left">
+            <span class="badge badge-neon platform-badge">Platform 12 Initiative</span>
+            <h2 class="platform-title">Low Waste Express</h2>
+            <div class="platform-offer">
+              <span>⚡ 20% Off Everyday Essentials</span>
+            </div>
+            <p class="platform-desc">
+              A curated rapid dispatch initiative designed to make fundamental zero-waste home and wellness swaps accessible to all. Guaranteed zero-emission priority delivery.
+            </p>
+          </div>
+
+          <div class="platform-right">
+            <!-- Digital Countdown Container -->
+            <div class="countdown-box">
+              <span class="countdown-label">Batch Window Closes In</span>
+              <div class="countdown-digits">
+                <div class="digit-unit">
+                  <span id="countdown-hr" class="digit-value">14</span>
+                  <span class="digit-label">HR</span>
+                </div>
+                <span class="digit-divider">:</span>
+                <div class="digit-unit">
+                  <span id="countdown-min" class="digit-value">38</span>
+                  <span class="digit-label">MIN</span>
+                </div>
+                <span class="digit-divider">:</span>
+                <div class="digit-unit">
+                  <span id="countdown-sec" class="digit-value">24</span>
+                  <span class="digit-label">SEC</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Browse Now CTA Button -->
+            <button id="platform-browse-now-btn" class="btn btn-primary platform-cta-btn">
+              Browse Now →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       VIEW: SHOP / MARKETPLACE
+       ========================================================================== -->
+  <main id="view-shop" class="view-section">
+    <section class="shop-section">
+      <div class="container">
+        <!-- Shop Header -->
+        <div class="shop-header">
+          <span class="section-subtitle">Zero-Waste Curated Catalog</span>
+          <h1 class="shop-headline">The Marketplace</h1>
+          <p class="shop-subheadline">Find Your Next Swap</p>
+        </div>
+
+        <!-- Filter Toolbar System -->
+        <div class="filter-toolbar-card">
+          <div class="filter-row-primary">
+            <!-- Refine Search -->
+            <div class="filter-search-box">
+              <svg class="filter-search-icon" viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+              </svg>
+              <input type="text" id="filter-search-input" class="filter-search-input" placeholder="Refine search (e.g. bamboo, bottle, tote)..." />
+            </div>
+
+            <!-- Category Dropdown -->
+            <div class="filter-select-wrapper">
+              <label class="filter-select-label" for="filter-category-select">Category</label>
+              <select id="filter-category-select" class="filter-select">
+                <option value="All">All Categories</option>
+                <option value="Personal Care">Personal Care</option>
+                <option value="Drinkware">Drinkware</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Cleaning">Cleaning</option>
+                <option value="Stationery">Stationery</option>
+                <option value="Solar">Solar Tech</option>
+                <option value="Outdoor">Outdoor</option>
+                <option value="Wellness">Wellness</option>
+                <option value="Kitchen">Kitchen</option>
+              </select>
+            </div>
+
+            <!-- Sort By Dropdown -->
+            <div class="filter-select-wrapper">
+              <label class="filter-select-label" for="filter-sort-select">Sort By</label>
+              <select id="filter-sort-select" class="filter-select">
+                <option value="recommended">Recommended</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="rating-desc">Highest Rated</option>
+                <option value="sustainability-desc">Most Sustainable</option>
+                <option value="newest">Newest Swaps</option>
+              </select>
+            </div>
+
+            <!-- Max Price Slider -->
+            <div class="filter-slider-wrapper">
+              <div class="filter-slider-header">
+                <label class="filter-slider-label" for="filter-price-slider">Max Price</label>
+                <span id="filter-price-val" class="filter-slider-value">$100</span>
+              </div>
+              <input type="range" id="filter-price-slider" class="filter-range-input" min="10" max="150" value="100" step="5" />
+            </div>
+
+            <!-- Clear Filters Button -->
+            <button id="filter-reset-btn" class="filter-reset-btn">
+              Clear Filters
+            </button>
+          </div>
+
+          <!-- Quick Leaf Rating Filters -->
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 4px;">
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Score Filter:</span>
+            <button class="btn btn-secondary leaf-filter-btn active" data-rating="0" style="padding: 6px 14px; font-size: 0.78rem;">All Ratings</button>
+            <button class="btn btn-secondary leaf-filter-btn" data-rating="5" style="padding: 6px 14px; font-size: 0.78rem;">🌿 5-Leaf Only</button>
+            <button class="btn btn-secondary leaf-filter-btn" data-rating="4" style="padding: 6px 14px; font-size: 0.78rem;">🌿 4+ Leaves</button>
+          </div>
+
+          <!-- Active Filter Status & Badges -->
+          <div class="filter-status-bar">
+            <span id="filter-results-count" class="filter-results-count">Showing 12 of 12 sustainable swaps</span>
+            <div id="filter-active-pills" class="filter-active-pills"></div>
+          </div>
+        </div>
+
+        <!-- Marketplace 12-Product Grid -->
+        <div id="marketplace-product-grid" class="product-grid"></div>
+
+        <!-- Featured Sustainable Picks (Editor's Selection Carousel) -->
+        <section class="featured-picks-section">
+          <div style="margin-bottom: 24px; text-align: left;">
+            <span class="section-subtitle">Editor's Selection</span>
+            <h2 class="section-title">Featured Sustainable Picks</h2>
+          </div>
+
+          <div id="featured-carousel-container" class="carousel-container">
+            <!-- Carousel Slides -->
+            <div id="carousel-slides-wrapper"></div>
+
+            <!-- Carousel Controls -->
+            <div class="carousel-controls">
+              <div id="carousel-dots-wrapper" class="carousel-dots"></div>
+              <div class="carousel-nav-arrows">
+                <button id="carousel-prev-btn" class="btn-icon" aria-label="Previous Slide">
+                  <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                  </svg>
+                </button>
+                <button id="carousel-next-btn" class="btn-icon" aria-label="Next Slide">
+                  <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       VIEW: DEDICATED PRODUCT DETAIL PAGE (Route: /product/:id)
+       ========================================================================== -->
+  <main id="view-product" class="view-section hidden">
+    <section class="product-page-section" style="padding: 40px 0 100px;">
+      <div class="container">
+        <!-- Breadcrumb & Back button -->
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 14px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.84rem; color: var(--text-muted);">
+            <a href="#shop" class="nav-link-subtle" onclick="window.ecomartStore.setActiveTab('shop')" style="color: var(--text-secondary); text-decoration: none;">The Marketplace</a>
+            <span>/</span>
+            <span id="product-page-breadcrumb-cat" style="color: var(--accent-neon);">Category</span>
+            <span>/</span>
+            <span id="product-page-breadcrumb-name" style="color: var(--text-primary);">Product Name</span>
+          </div>
+          <button id="product-page-back-btn" class="btn btn-secondary" style="padding: 8px 18px; font-size: 0.84rem; display: flex; align-items: center; gap: 6px;">
+            ← Back to Marketplace
+          </button>
+        </div>
+
+        <!-- Dedicated Product Detail Container -->
+        <div id="product-page-content" class="product-page-grid"></div>
+
+        <!-- Related Products Section -->
+        <div style="margin-top: 80px; border-top: 1px solid var(--border-subtle); padding-top: 50px;">
+          <div style="margin-bottom: 30px;">
+            <span class="section-subtitle">Complementary Swaps</span>
+            <h2 class="section-title">Related Sustainable Swaps</h2>
+          </div>
+          <div id="product-page-related-grid" class="product-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       VIEW: IMPACT & METRICS
+       ========================================================================== -->
+  <main id="view-impact" class="view-section">
+    <section class="impact-section">
+      <div class="container">
+        <!-- Impact Hero Grid -->
+        <div class="impact-hero-grid">
+          <div class="impact-hero-content">
+            <span class="section-subtitle">Real-Time Ecological Metrics</span>
+            <h1 class="impact-hero-title">
+              What We've<br />
+              <span class="hero-title-highlight">Saved Together</span>
+            </h1>
+            <p class="impact-hero-desc">
+              Every checkout is an act of planetary regeneration. Through transparent lifecycle accounting, our community tracks the collective carbon, plastic, and waste avoided by choosing durable, closed-loop essentials.
+            </p>
+            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+              <span class="badge badge-neon">✓ Live Community Telemetry</span>
+              <span class="badge badge-dark">✓ Audited GHG Reductions</span>
+            </div>
+          </div>
+
+          <!-- Futuristic Bottle Visualization HUD -->
+          <div class="impact-visualization-card">
+            <div class="bottle-hud-header">
+              <span class="bottle-hud-title">Vessel Sustainability Matrix</span>
+              <span id="bottle-status-readout" class="bottle-hud-status">GLOBAL RETENTION 78%</span>
+            </div>
+
+            <div class="bottle-graphic-container">
+              <!-- SVG Bottle Graphic -->
+              <svg class="bottle-outline-svg" viewBox="0 0 200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="neon-liquid-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#00FF88" stop-opacity="0.85" />
+                    <stop offset="100%" stop-color="#059669" stop-opacity="0.95" />
+                  </linearGradient>
+                  <linearGradient id="co2-liquid-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#10FFA0" stop-opacity="0.9" />
+                    <stop offset="100%" stop-color="#065F46" stop-opacity="0.95" />
+                  </linearGradient>
+                  <linearGradient id="ocean-liquid-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.85" />
+                    <stop offset="100%" stop-color="#047857" stop-opacity="0.95" />
+                  </linearGradient>
+                  <linearGradient id="waste-liquid-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.85" />
+                    <stop offset="100%" stop-color="#059669" stop-opacity="0.95" />
+                  </linearGradient>
+                  <clipPath id="bottle-clip">
+                    <!-- Bottle interior silhouette -->
+                    <path d="M75 25 H125 V70 C145 90 165 110 165 145 V315 C165 335 150 345 130 345 H70 C50 345 35 335 35 315 V145 C35 110 55 90 75 70 Z" />
+                  </clipPath>
+                </defs>
+
+                <!-- Bottle Base & Outer Glass -->
+                <path d="M70 20 H130 V65 C150 85 170 105 170 145 V320 C170 342 152 355 130 355 H70 C48 355 30 342 30 320 V145 C30 105 50 85 70 65 Z" 
+                      stroke="#00FF88" stroke-width="2.5" stroke-opacity="0.6" fill="rgba(6, 20, 13, 0.6)" />
+                
+                <!-- Bottle Cap -->
+                <rect x="78" y="6" width="44" height="14" rx="4" stroke="#00FF88" stroke-width="2" fill="#0D2418" />
+                <path d="M88 6 V20 M100 6 V20 M112 6 V20" stroke="#00FF88" stroke-width="1.5" stroke-opacity="0.4" />
+
+                <!-- Liquid Fill with Wave Animation -->
+                <g clip-path="url(#bottle-clip)">
+                  <rect id="bottle-liquid-rect" class="bottle-liquid-fill" x="0" y="110" width="200" height="250" fill="url(#neon-liquid-grad)" />
+                  <!-- Grid measurement tick lines inside bottle -->
+                  <line x1="45" y1="150" x2="65" y2="150" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+                  <line x1="45" y1="200" x2="75" y2="200" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+                  <line x1="45" y1="250" x2="65" y2="250" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+                  <line x1="45" y1="300" x2="75" y2="300" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+                </g>
+
+                <!-- Glowing Laser Engraved Center Leaf -->
+                <path d="M100 190 C90 200 87 215 82 228 C87 228 92 227 96 222 C104 212 108 198 108 190 Z" fill="#FFFFFF" fill-opacity="0.85" filter="drop-shadow(0 0 6px #00FF88)" />
+              </svg>
+
+              <!-- Floating HUD Callouts -->
+              <div class="bottle-callout callout-co2">
+                <span class="callout-num">24,580</span>
+                <span class="callout-label">kg CO₂ Saved</span>
+              </div>
+              <div class="bottle-callout callout-bottles">
+                <span class="callout-num">18,420</span>
+                <span class="callout-label">Bottles Diverted</span>
+              </div>
+              <div class="bottle-callout callout-coverage">
+                <span class="callout-num">92%</span>
+                <span class="callout-label">Route Coverage</span>
+              </div>
+            </div>
+
+            <!-- Layer Switches -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; width: 100%;">
+              <button class="btn btn-secondary bottle-layer-btn active" data-mode="all" style="padding: 8px 16px; font-size: 0.8rem;">
+                All Metrics
+              </button>
+              <button class="btn btn-secondary bottle-layer-btn" data-mode="co2" style="padding: 8px 16px; font-size: 0.8rem;">
+                CO₂ Layer
+              </button>
+              <button class="btn btn-secondary bottle-layer-btn" data-mode="plastic" style="padding: 8px 16px; font-size: 0.8rem;">
+                Ocean Plastic
+              </button>
+              <button class="btn btn-secondary bottle-layer-btn" data-mode="waste" style="padding: 8px 16px; font-size: 0.8rem;">
+                Landfill
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Key Community Metrics Cards -->
+        <div class="impact-metrics-grid">
+          <div class="impact-stat-card">
+            <div class="stat-icon-badge">
+              <svg style="width: 22px; height: 22px; fill: currentColor;" viewBox="0 0 24 24">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+              </svg>
+            </div>
+            <div class="stat-number stat-number-accent stat-number-animated" data-target="24580" data-unit="kg">
+              24,580 kg
+            </div>
+            <h3 class="stat-title">CO₂ Emissions Avoided</h3>
+            <p class="stat-desc">Calculated against petrochemical single-use extraction, manufacturing, and transit baselines.</p>
+          </div>
+
+          <div class="impact-stat-card">
+            <div class="stat-icon-badge">
+              <svg style="width: 22px; height: 22px; fill: currentColor;" viewBox="0 0 24 24">
+                <path d="M12 2c-5.33 4-8 8.67-8 14 0 4.42 3.58 8 8 8s8-3.58 8-8c0-5.33-2.67-10-8-14z"/>
+              </svg>
+            </div>
+            <div class="stat-number stat-number-accent stat-number-animated" data-target="18420" data-unit="units">
+              18,420
+            </div>
+            <h3 class="stat-title">Plastic Bottles Diverted</h3>
+            <p class="stat-desc">Kept out of sensitive marine habitats, river deltas, and municipal incinerators.</p>
+          </div>
+
+          <div class="impact-stat-card">
+            <div class="stat-icon-badge">
+              <svg style="width: 22px; height: 22px; fill: currentColor;" viewBox="0 0 24 24">
+                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+              </svg>
+            </div>
+            <div class="stat-number stat-number-accent stat-number-animated" data-target="7250" data-unit="kg">
+              7,250 kg
+            </div>
+            <h3 class="stat-title">Landfill Waste Diverted</h3>
+            <p class="stat-desc">Through closed-loop repair programs, compostable designs, and upcycled fibers.</p>
+          </div>
+
+          <div class="impact-stat-card">
+            <div class="stat-icon-badge">
+              <svg style="width: 22px; height: 22px; fill: currentColor;" viewBox="0 0 24 24">
+                <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+              </svg>
+            </div>
+            <div class="stat-number stat-number-accent stat-number-animated" data-target="92" data-unit="%">
+              92%
+            </div>
+            <h3 class="stat-title">Eco-Delivery Coverage</h3>
+            <p class="stat-desc">All regional packages dispatched via 100% electrified or carbon-offset micro hubs.</p>
+          </div>
+        </div>
+
+        <!-- Impact Storytelling Cards (3 Cards) -->
+        <div style="margin-bottom: 24px; text-align: left;">
+          <span class="section-subtitle">Circular Philosophy</span>
+          <h2 class="section-title">The Ripple Effect</h2>
+        </div>
+        <div class="story-grid">
+          <div class="story-card">
+            <span class="badge badge-neon story-pill">Micro Decisions</span>
+            <h3 class="story-title">Every Swap Counts</h3>
+            <p class="story-text">
+              Replacing a single petroleum toothbrush or plastic bottle might feel negligible on day one. Compounded over a decade across 50,000 households, it halts millions of tons of indestructible waste.
+            </p>
+          </div>
+
+          <div class="story-card">
+            <span class="badge badge-neon story-pill">Circular Loops</span>
+            <h3 class="story-title">Less Waste, More Future</h3>
+            <p class="story-text">
+              We reject the extractive "take-make-waste" industrial model. Our suppliers operate closed-loop manufacturing cycles where water is recirculated and scrap off-cuts are re-fed into new production.
+            </p>
+          </div>
+
+          <div class="story-card">
+            <span class="badge badge-neon story-pill">Aesthetic Excellence</span>
+            <h3 class="story-title">Better Products, Better Planet</h3>
+            <p class="story-text">
+              Sustainability should never feel like a sacrifice or downgrade. We curate items with futuristic elegance, tactile luxury, and superior durability that outperform standard consumer goods.
+            </p>
+          </div>
+        </div>
+
+        <!-- Personal Savings Calculator Widget -->
+        <div class="calculator-card">
+          <div class="calc-left">
+            <div>
+              <span class="badge badge-neon" style="margin-bottom: 8px;">Personal Impact Estimator</span>
+              <h2 style="font-size: 2rem; font-weight: 800;">Calculate Your Annual Eco-Dividends</h2>
+              <p style="color: var(--text-secondary); margin-top: 6px;">
+                Adjust your weekly disposable habits to see how much plastic and carbon you keep out of ecosystems simply by switching to Ecomart essentials.
+              </p>
+            </div>
+
+            <div class="calc-sliders">
+              <!-- Slider 1 -->
+              <div class="calc-slider-item">
+                <div class="calc-slider-header">
+                  <span>Plastic Water Bottles used</span>
+                  <span id="calc-bottles-val" class="calc-slider-val">7 / wk</span>
+                </div>
+                <input type="range" id="calc-bottles" class="filter-range-input" min="0" max="25" value="7" />
+              </div>
+
+              <!-- Slider 2 -->
+              <div class="calc-slider-item">
+                <div class="calc-slider-header">
+                  <span>Disposable Shopping Bags used</span>
+                  <span id="calc-bags-val" class="calc-slider-val">5 / wk</span>
+                </div>
+                <input type="range" id="calc-bags" class="filter-range-input" min="0" max="20" value="5" />
+              </div>
+
+              <!-- Slider 3 -->
+              <div class="calc-slider-item">
+                <div class="calc-slider-header">
+                  <span>Single-Use Coffee Cups used</span>
+                  <span id="calc-cups-val" class="calc-slider-val">4 / wk</span>
+                </div>
+                <input type="range" id="calc-cups" class="filter-range-input" min="0" max="20" value="4" />
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-right">
+            <span class="calc-result-label">Your Annual Impact by Swapping</span>
+            <div>
+              <div id="calc-co2-result" class="calc-result-number">62 kg</div>
+              <div class="calc-result-label">Net CO₂ Reduction / Year</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-top: 1px dashed var(--border-subtle); padding-top: 16px;">
+              <div>
+                <div id="calc-plastic-result" style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--text-primary);">832</div>
+                <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent-neon); text-transform: uppercase;">Plastics Avoided</div>
+              </div>
+              <div>
+                <div id="calc-trees-result" style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--text-primary);">2.8</div>
+                <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent-neon); text-transform: uppercase;">Tree Equivalents</div>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="window.ecomartStore.setActiveTab('shop')" style="margin-top: 6px;">
+              Start Swapping Today
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       VIEW: ABOUT / SUSTAINABILITY PHILOSOPHY
+       ========================================================================== -->
+  <main id="view-about" class="view-section">
+    <section class="about-section">
+      <div class="container">
+        <!-- Editorial Header -->
+        <div class="about-header">
+          <span class="section-subtitle">Ethical Architecture</span>
+          <h1 class="about-headline">
+            What Makes<br />
+            Product<br />
+            <span class="hero-title-highlight">Sustainability</span>
+          </h1>
+          <p class="about-intro-text">
+            Sustainability is not a marketing buzzword or a leaf stamped on generic plastics. It is a comprehensive scientific discipline rooted in closed-loop materials, regenerative energy, non-toxic chemistry, and designed longevity.
+          </p>
+        </div>
+
+        <!-- Expandable Accordion Principles -->
+        <div id="sustainability-accordion-container" class="sustainability-accordion-list"></div>
+
+        <!-- Final CTA Section: One Small Swap a Month -->
+        <div class="final-cta-card">
+          <span class="badge badge-neon">Collective Momentum</span>
+          <h2 class="final-cta-headline">
+            One Small Swap<br />
+            <span class="hero-title-highlight">A Month</span>
+          </h2>
+          <p class="final-cta-subtext">
+            Small sustainable decisions compound into monumental planetary healing. Join over 50,000 conscious pioneers rewriting the future of consumption.
+          </p>
+
+          <!-- Pill-Shaped Capsule UI Controls -->
+          <div class="capsule-group">
+            <button id="capsule-email-btn" class="capsule-btn capsule-email">
+              <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              <span>Email Eco-Digest</span>
+            </button>
+            <button id="capsule-login-btn" class="capsule-btn capsule-login">
+              <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              <span>Member Login</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       GLOBAL MODALS & DRAWERS
+       ========================================================================== -->
+
+  <!-- Slide-out Right Cart Drawer -->
+  <div id="cart-drawer-backdrop" class="cart-drawer-backdrop"></div>
+  <aside id="cart-drawer" class="cart-drawer" aria-label="Shopping Cart">
+    <div class="cart-drawer-header">
+      <div class="cart-title-wrapper">
+        <svg style="width: 24px; height: 24px; fill: var(--accent-neon);" viewBox="0 0 24 24">
+          <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+        </svg>
+        <h2 class="cart-title">Your Eco-Cart</h2>
+      </div>
+      <button id="cart-close-btn" class="cart-close-btn" aria-label="Close Cart">&times;</button>
+    </div>
+
+    <!-- Free shipping & impact bar -->
+    <div id="cart-shipping-msg" class="cart-impact-bar">
+      📦 Add <strong>$26.00</strong> for <strong>Free Carbon-Neutral Express</strong>
+    </div>
+
+    <!-- Cart items scroll list -->
+    <div id="cart-items-container" class="cart-items-container"></div>
+
+    <!-- Cart Footer / Checkout -->
+    <div class="cart-drawer-footer">
+      <div class="cart-impact-pill">
+        <svg class="cart-impact-icon" viewBox="0 0 24 24">
+          <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/>
+        </svg>
+        <div class="cart-impact-label">
+          Estimated Order Impact: <strong id="cart-impact-co2">18.4 kg CO₂</strong> & <strong id="cart-impact-plastics">150 single-use items</strong> avoided.
+        </div>
+      </div>
+
+      <div class="cart-subtotal-row">
+        <span class="cart-subtotal-label">Subtotal</span>
+        <span id="cart-subtotal-val" class="cart-subtotal-value">$24.00</span>
+      </div>
+
+      <button id="cart-checkout-btn" class="btn btn-primary cart-checkout-btn">
+        Proceed to Carbon-Neutral Checkout →
+      </button>
+    </div>
+  </aside>
+
+  <!-- Global Product Detail Modal -->
+  <div id="product-modal-backdrop" class="product-modal-backdrop">
+    <div class="product-modal-card">
+      <button id="product-modal-close-btn" class="product-modal-close-btn" aria-label="Close Modal">&times;</button>
+      <div id="product-modal-card-content" style="display: contents;"></div>
+    </div>
+  </div>
+
+  <!-- Search Modal Overlay -->
+  <div id="search-modal-backdrop" class="search-modal-backdrop">
+    <div class="search-modal-card">
+      <div class="search-input-wrapper">
+        <svg style="width: 22px; height: 22px; fill: var(--accent-neon);" viewBox="0 0 24 24">
+          <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
+        <input type="text" id="search-input-field" class="search-input-field" placeholder="Search 12 sustainable products (e.g. bamboo, bottle)..." />
+        <button id="search-close-btn" class="search-close-btn" aria-label="Close search">&times;</button>
+      </div>
+      <div id="search-results-list" class="search-results-list"></div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkout-modal-backdrop" class="auth-modal-backdrop">
+    <div class="auth-modal-card" style="max-width: 560px;">
+      <button id="checkout-close-btn" class="product-modal-close-btn" aria-label="Close Checkout">&times;</button>
+      <div id="checkout-modal-body">
+        <span class="badge badge-neon">Solar-Powered Dispatch</span>
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin-top: 8px;">Carbon-Neutral Checkout</h2>
+        <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px;">
+          Your order will be dispatched in 100% plastic-free compostable boxes via optimized zero-emission routes.
+        </p>
+
+        <form id="checkout-form" class="auth-form">
+          <div class="form-group">
+            <label class="form-label" for="checkout-name">Name</label>
+            <input type="text" id="checkout-name" class="form-input" required placeholder="Alex Rivera" value="Alex Rivera" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="checkout-email">Email</label>
+            <input type="email" id="checkout-email" class="form-input" required placeholder="alex@ecofuture.io" value="alex@ecofuture.io" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="checkout-address">Address</label>
+            <input type="text" id="checkout-address" class="form-input" required placeholder="742 Evergreen Terrace" value="742 Evergreen Terrace" />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label" for="checkout-city">City</label>
+              <input type="text" id="checkout-city" class="form-input" required placeholder="Portland" value="Portland" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="checkout-postal">Postal Code</label>
+              <input type="text" id="checkout-postal" class="form-input" required placeholder="97201" value="97201" />
+            </div>
+          </div>
+
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px; margin: 6px 0;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 4px;">
+              <span style="color: var(--text-secondary);">Order Subtotal</span>
+              <strong id="checkout-modal-subtotal" style="color: var(--accent-neon-bright); font-family: var(--font-display);">$24.00</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted);">
+              <span>CO₂ Offset:</span>
+              <span id="checkout-modal-co2" style="color: var(--accent-neon);">18.4 kg</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted);">
+              <span>Plastics Diverted:</span>
+              <span id="checkout-modal-plastics" style="color: var(--accent-neon);">150 units</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;">
+            Complete Sustainable Purchase
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter Email Modal -->
+  <div id="email-modal-backdrop" class="auth-modal-backdrop">
+    <div class="auth-modal-card">
+      <button id="email-modal-close-btn" class="product-modal-close-btn" aria-label="Close">&times;</button>
+      <div id="email-modal-content">
+        <span class="badge badge-neon">Ecomart Newsletter</span>
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin-top: 8px;">Stay in the Loop</h2>
+        <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px;">
+          Receive curated zero-waste guides, exclusive Platform 12 drops, and a verified mangrove tree planted in your name on subscription.
+        </p>
+        <form id="email-newsletter-form" class="auth-form">
+          <div class="form-group">
+            <label class="form-label" for="newsletter-email-input">Your email</label>
+            <input type="email" id="newsletter-email-input" class="form-input" required placeholder="pioneer@sustainable.eco" />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;">
+            Join Ecomart
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Member Login Modal -->
+  <div id="login-modal-backdrop" class="auth-modal-backdrop">
+    <div class="auth-modal-card">
+      <button id="login-modal-close-btn" class="product-modal-close-btn" aria-label="Close">&times;</button>
+      <div id="login-modal-content">
+        <span class="badge badge-neon">Cyber-Emerald Vault</span>
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin-top: 8px;">Member Login</h2>
+        <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px;">
+          Sign in to sync your lifetime plastics avoidance dashboard and unlock member-tier Platform 12 discounts.
+        </p>
+        <form id="member-login-form" class="auth-form">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email</label>
+            <input type="email" id="login-email" class="form-input" required placeholder="pioneer@ecomart.eco" value="pioneer@ecomart.eco" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <input type="password" id="login-password" class="form-input" required placeholder="••••••••••••" value="ecofuture2026" />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;">
+            Log In
+          </button>
+          <button type="button" id="login-guest-btn" class="btn btn-secondary" style="width: 100%; padding: 14px; margin-top: 8px;">
+            Continue as Guest
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 50px 0 30px; background: var(--bg-secondary); margin-top: 80px;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="brand-icon-wrapper" style="width: 30px; height: 30px;">
+            <svg class="brand-leaf-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24">
+              <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/>
+            </svg>
+          </div>
+          <span style="font-family: var(--font-display); font-weight: 800; font-size: 1.25rem;">ECOMART</span>
+        </div>
+        <div style="display: flex; gap: 24px; font-family: var(--font-display); font-size: 0.92rem; color: var(--text-secondary);">
+          <a href="#home" onclick="window.ecomartStore.setActiveTab('home')" style="color: inherit; text-decoration: none;">Home</a>
+          <a href="#shop" onclick="window.ecomartStore.setActiveTab('shop')" style="color: inherit; text-decoration: none;">Marketplace</a>
+          <a href="#impact" onclick="window.ecomartStore.setActiveTab('impact')" style="color: inherit; text-decoration: none;">Impact Matrix</a>
+          <a href="#about" onclick="window.ecomartStore.setActiveTab('about')" style="color: inherit; text-decoration: none;">Philosophy</a>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-muted); border-top: 1px dashed var(--border-subtle); padding-top: 20px;">
+        <span>© 2026 ECOMART Inc. Certified B-Corporation • 100% Carbon-Neutral Digital Platform</span>
+        <span>Built for Hackathon Round 2 • Premium Dark Emerald Futurism</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/sound.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/carousel.js"></script>
+  <script src="js/impact.js"></script>
+  <script src="js/about.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

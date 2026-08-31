@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impact Matrix — Ecomart | What We've Saved Together</title>
+  <meta name="description" content="Explore real-time audited environmental savings, interactive vessel sustainability telemetry, and calculate your personal ecological dividends." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/navbar.css" />
+  <link rel="stylesheet" href="styles/impact.css" />
+  <link rel="stylesheet" href="styles/cursor.css" />
+</head>
+<body>
+  <!-- Custom Botanical Leaf Cursor -->
+  <div id="custom-cursor" class="custom-cursor">
+    <svg class="cursor-leaf-icon" viewBox="0 0 24 24">
+      <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/>
+    </svg>
+  </div>
+  <div id="cursor-trail-dot" class="cursor-trail-dot"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Global Site Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav-wrapper" aria-label="Main Navigation">
+        <!-- Brand Logo -->
+        <a href="index.html" class="brand-logo">
+          <div class="brand-icon-wrapper">
+            <svg class="brand-leaf-svg" viewBox="0 0 24 24">
+              <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/>
+            </svg>
+          </div>
+          <span class="brand-text">ECOMART</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="shop.html" class="nav-link">Shop</a></li>
+          <li><a href="impact.html" class="nav-link active">Impact</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+
+        <!-- Nav Actions -->
+        <div class="nav-actions">
+          <button id="search-trigger-btn" class="search-trigger-btn" aria-label="Search Products">
+            <svg style="width: 17px; height: 17px; fill: currentColor;" viewBox="0 0 24 24">
+              <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+            <span class="search-label">Search Product</span>
+            <span class="search-kbd">/</span>
+          </button>
+
+          <button id="sfx-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Audio Feedback" title="Enable Cyber-Chimes">
+            <svg style="width: 20px; height: 20px; fill: var(--text-muted);" viewBox="0 0 24 24">
+              <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+            </svg>
+          </button>
+
+          <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+            <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24">
+              <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1z"/>
+            </svg>
+          </button>
+
+          <button id="cart-trigger-btn" class="cart-trigger-btn" aria-label="Open Cart">
+            <svg class="cart-leaf-icon" style="width: 19px; height: 19px; fill: var(--accent-neon);" viewBox="0 0 24 24">
+              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+            <span>Cart</span>
+            <span id="cart-badge" class="cart-badge">0</span>
+          </button>
+
+          <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle mobile menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+        <li><a href="shop.html" class="mobile-nav-link">Shop Marketplace</a></li>
+        <li><a href="impact.html" class="mobile-nav-link active">Impact & Metrics</a></li>
+        <li><a href="about.html" class="mobile-nav-link">Sustainability Philosophy</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       DEDICATED IMPACT MATRIX VIEW
+       ========================================================================== -->
+  <main class="view-section" style="padding-top: 30px;">
+    <section class="impact-section">
+      <div class="container">
+        <!-- Impact Hero Grid -->
+        <div class="impact-hero-grid">
+          <div class="impact-hero-content">
+            <span class="section-subtitle">Real-Time Ecological Metrics</span>
+            <h1 class="impact-hero-title">
+              What We've<br />
+              <span class="hero-title-highlight">Saved Together</span>
+            </h1>
+            <p class="impact-hero-desc">
+              Every checkout is an act of planetary regeneration. Through transparent lifecycle accounting, our community tracks the collective carbon, plastic, and waste avoided by choosing durable, closed-loop essentials.
+            </p>
+            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+              <span class="badge badge-neon">✓ Live Community Telemetry</span>
+              <span class="badge badge-dark">✓ Audited GHG Reductions</span>
+            </div>
+          </div>
+
+          <!-- Futuristic Bottle Visualization HUD -->
+          <div class="impact-visualization-card">
+            <div class="bottle-hud-header">
+              <span class="bottle-hud-title">Vessel Sustainability Matrix</span>
+              <span id="bottle-status-readout" class="bottle-hud-status">GLOBAL RETENTION 78%</span>
+            </div>
+
+            <div class="bottle-graphic-container">
+              <!-- SVG Bottle Graphic -->
+              <svg class="bottle-outline-svg" viewBox="0 0 200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="neon-liquid-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#00FF88" stop-opacity="0.85" />
+                    <stop offset="100%" stop-color="#059669" stop-opacity="0.95" />
+                  </linearGradient>
+                  <linearGradient id="co2-liquid-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#10FFA0" stop-opacity="0.9" />
+                    <stop offset="100%" stop-color="#065F46" stop-opacity="0.95" />
+                  </linearGradient>
+                  <linearGradient id="ocean-liquid-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.85" />
+                    <stop offset="100%" stop-color="#047857" stop-opacity="0.95" />
+                  </linearGradient>
+                  <clipPath id="bottle-inner-mask">
+                    <path d="M75 10 C75 6 78 4 82 4 L118 4 C122 4 125 6 125 10 L125 45 C125 55 132 68 142 78 L154 90 C166 102 172 118 172 135 L172 320 C172 342 154 356 132 356 L68 356 C46 356 28 342 28 320 L28 135 C28 118 34 102 46 90 L58 78 C68 68 75 55 75 45 Z" />
+                  </clipPath>
+                </defs>
+
+                <!-- Outer Glass Hull -->
+                <path d="M75 10 C75 6 78 4 82 4 L118 4 C122 4 125 6 125 10 L125 45 C125 55 132 68 142 78 L154 90 C166 102 172 118 172 135 L172 320 C172 342 154 356 132 356 L68 356 C46 356 28 342 28 320 L28 135 C28 118 34 102 46 90 L58 78 C68 68 75 55 75 45 Z" 
+                      stroke="var(--accent-neon)" stroke-width="2" fill="rgba(0, 255, 136, 0.03)" />
+                
+                <!-- Internal Dynamic Liquid Fill with Wave Clip -->
+                <g clip-path="url(#bottle-inner-mask)">
+                  <rect id="bottle-liquid-rect" class="bottle-liquid" x="0" y="100" width="200" height="260" fill="url(#neon-liquid-grad)" />
+                  <!-- Grid measurement tick lines -->
+                  <line x1="28" y1="120" x2="60" y2="120" stroke="rgba(0, 255, 136, 0.4)" stroke-width="1" />
+                  <line x1="28" y1="180" x2="70" y2="180" stroke="rgba(0, 255, 136, 0.4)" stroke-width="1" />
+                  <line x1="28" y1="240" x2="60" y2="240" stroke="rgba(0, 255, 136, 0.4)" stroke-width="1" />
+                  <line x1="28" y1="300" x2="80" y2="300" stroke="rgba(0, 255, 136, 0.4)" stroke-width="1" />
+                </g>
+
+                <!-- Bottle Cap Laser Accents -->
+                <rect x="78" y="2" width="44" height="12" rx="3" fill="#0A1610" stroke="var(--accent-neon)" stroke-width="1.5" />
+              </svg>
+
+              <!-- Dynamic Data Pins Overlay -->
+              <div class="bottle-data-pin pin-co2">
+                <span class="pin-dot"></span>
+                <span class="pin-text">24,580 kg CO₂</span>
+              </div>
+              <div class="bottle-data-pin pin-bottles">
+                <span class="pin-dot"></span>
+                <span class="pin-text">18,420 Bottles</span>
+              </div>
+              <div class="bottle-data-pin pin-waste">
+                <span class="pin-dot"></span>
+                <span class="pin-text">7,250 kg Waste</span>
+              </div>
+              <div class="bottle-data-pin pin-delivery">
+                <span class="pin-dot"></span>
+                <span class="pin-text">92% Coverage</span>
+              </div>
+            </div>
+
+            <!-- Layer Switches -->
+            <div class="bottle-layer-switches">
+              <button class="layer-switch-btn active" data-layer="all">All Layers</button>
+              <button class="layer-switch-btn" data-layer="co2">CO₂ Offsets</button>
+              <button class="layer-switch-btn" data-layer="plastic">Ocean Plastic</button>
+              <button class="layer-switch-btn" data-layer="landfill">Landfill Diverted</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Primary Animated Stats Grid -->
+        <div class="impact-stats-grid">
+          <!-- Card 1 -->
+          <div class="impact-stat-card">
+            <div class="impact-stat-top">
+              <div class="impact-stat-icon-wrapper">
+                <svg class="impact-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <span class="impact-stat-badge">Verified GHG</span>
+            </div>
+            <div class="impact-stat-number-wrapper">
+              <span class="impact-stat-value count-up" data-target="24580" data-prefix="" data-suffix="">0</span>
+              <span class="impact-stat-unit">kg CO₂</span>
+            </div>
+            <h3 class="impact-stat-title">Carbon Emissions Avoided</h3>
+            <p class="impact-stat-desc">
+              Equivalent to preserving 410 mature urban trees for an entire decade through closed-loop swaps.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="impact-stat-card">
+            <div class="impact-stat-top">
+              <div class="impact-stat-icon-wrapper">
+                <svg class="impact-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M8 2h8l2 6H6l2-6zM6 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8"></path>
+                </svg>
+              </div>
+              <span class="impact-stat-badge">Marine Clean</span>
+            </div>
+            <div class="impact-stat-number-wrapper">
+              <span class="impact-stat-value count-up" data-target="18420" data-prefix="" data-suffix="">0</span>
+              <span class="impact-stat-unit">Units</span>
+            </div>
+            <h3 class="impact-stat-title">Single-Use Bottles Replaced</h3>
+            <p class="impact-stat-desc">
+              Intercepted from river mouths and coastal ecosystems across Southeast Asia and the Pacific.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="impact-stat-card">
+            <div class="impact-stat-top">
+              <div class="impact-stat-icon-wrapper">
+                <svg class="impact-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+              </div>
+              <span class="impact-stat-badge">Zero Landfill</span>
+            </div>
+            <div class="impact-stat-number-wrapper">
+              <span class="impact-stat-value count-up" data-target="7250" data-prefix="" data-suffix="">0</span>
+              <span class="impact-stat-unit">kg Waste</span>
+            </div>
+            <h3 class="impact-stat-title">Municipal Waste Diverted</h3>
+            <p class="impact-stat-desc">
+              Diverted from degrading in landfill sites into regenerative compost and closed-loop recyclables.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="impact-stat-card">
+            <div class="impact-stat-top">
+              <div class="impact-stat-icon-wrapper">
+                <svg class="impact-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <span class="impact-stat-badge">EV Transit</span>
+            </div>
+            <div class="impact-stat-number-wrapper">
+              <span class="impact-stat-value count-up" data-target="92" data-prefix="" data-suffix="%">0</span>
+              <span class="impact-stat-unit">Coverage</span>
+            </div>
+            <h3 class="impact-stat-title">Sustainable Delivery Fleet</h3>
+            <p class="impact-stat-desc">
+              Fulfilled exclusively through electric delivery vans and cargo bicycles with zero last-mile exhaust.
+            </p>
+          </div>
+        </div>
+
+        <!-- Impact Storytelling & Scientific Principles -->
+        <div class="impact-story-grid">
+          <!-- Story 1 -->
+          <div class="story-card">
+            <div class="story-tag">01 / Compound Effect</div>
+            <h3 class="story-title">Every Swap Counts</h3>
+            <p class="story-desc">
+              A single bamboo toothbrush saves 0.15 kg of virgin petroleum plastic. Multiplied across 50,000 households over 12 months, that translates to over 30 tons of non-degrading polymers permanently kept out of fragile marine habitats.
+            </p>
+          </div>
+
+          <!-- Story 2 -->
+          <div class="story-card">
+            <div class="story-tag">02 / Circularity</div>
+            <h3 class="story-title">Less Waste, More Future</h3>
+            <p class="story-desc">
+              Linear consumption creates irreversible degradation. Ecomart operates exclusively on circularity: raw bio-composites, non-toxic plant chemistry, and infinitely recyclable alloys that give back to the soil at end-of-life.
+            </p>
+          </div>
+
+          <!-- Story 3 -->
+          <div class="story-card">
+            <div class="story-tag">03 / Long-Term Regeneration</div>
+            <h3 class="story-title">Better Products, Better Planet</h3>
+            <p class="story-desc">
+              Durability is the ultimate ecological metric. By engineering vacuum-insulated steel bottles and heavyweight organic totes engineered to last a decade, we reduce the total manufacturing turnover footprint of everyday tools.
+            </p>
+          </div>
+        </div>
+
+        <!-- Personal Savings Calculator Widget -->
+        <div class="calculator-card">
+          <div class="calculator-header">
+            <span class="badge badge-neon">Interactive Sim</span>
+            <h3 class="calculator-title">Calculate Your Personal Planetary Dividend</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">
+              See how your household swaps compound into tangible CO₂ reductions and diverted ocean plastics over 12 months.
+            </p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin: 24px 0;">
+            <div>
+              <label class="filter-slider-label" for="calc-household-slider">Household Size (People)</label>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span id="calc-household-val" style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--accent-neon);">2 People</span>
+              </div>
+              <input type="range" id="calc-household-slider" class="filter-range-input" min="1" max="8" value="2" />
+            </div>
+
+            <div>
+              <label class="filter-slider-label" for="calc-swaps-slider">Monthly Zero-Waste Swaps</label>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span id="calc-swaps-val" style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--accent-neon);">4 Swaps / mo</span>
+              </div>
+              <input type="range" id="calc-swaps-slider" class="filter-range-input" min="1" max="15" value="4" />
+            </div>
+          </div>
+
+          <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 16px; text-align: center;">
+            <div>
+              <div id="calc-co2-result" style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--accent-neon-bright);">118 kg</div>
+              <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent-neon); text-transform: uppercase;">Annual CO₂ Saved</div>
+            </div>
+            <div>
+              <div id="calc-plastic-result" style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--text-primary);">832</div>
+              <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent-neon); text-transform: uppercase;">Plastics Avoided</div>
+            </div>
+            <div>
+              <div id="calc-trees-result" style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--text-primary);">2.8</div>
+              <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent-neon); text-transform: uppercase;">Tree Equivalents</div>
+            </div>
+          </div>
+          <a href="shop.html" class="btn btn-primary" style="margin-top: 20px; display: inline-block; text-decoration: none; text-align: center;">
+            Start Swapping Today
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Slide-Out Cart Drawer -->
+  <div id="cart-drawer-backdrop" class="cart-drawer-backdrop">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <div class="cart-header-title">
+          <span>Your Eco-Cart</span>
+          <span class="badge badge-neon" id="cart-drawer-count">0 items</span>
+        </div>
+        <button id="cart-close-btn" class="btn-icon" aria-label="Close Cart">
+          <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="cart-progress-bar-wrapper">
+        <div class="cart-progress-info">
+          <span id="cart-shipping-text">Add $50 for Free Carbon-Neutral Shipping</span>
+          <span id="cart-shipping-percent">0%</span>
+        </div>
+        <div class="cart-progress-track">
+          <div id="cart-progress-fill" class="cart-progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div id="cart-items-list" class="cart-items-list"></div>
+
+      <div class="cart-footer">
+        <div class="cart-impact-pill">
+          <svg style="width: 16px; height: 16px; fill: var(--accent-neon);" viewBox="0 0 24 24">
+            <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/>
+          </svg>
+          <span id="cart-impact-text">0.0 kg CO₂ & 0 plastic units avoided</span>
+        </div>
+
+        <div class="cart-summary-row">
+          <span class="cart-subtotal-label">Subtotal</span>
+          <span id="cart-subtotal-val" class="cart-subtotal-val">$0.00</span>
+        </div>
+
+        <button id="cart-checkout-btn" class="btn btn-primary btn-checkout" disabled>
+          Carbon-Neutral Checkout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Modal -->
+  <div id="search-modal-backdrop" class="search-modal-backdrop">
+    <div class="search-modal-card">
+      <div class="search-modal-header">
+        <svg style="width: 20px; height: 20px; fill: var(--accent-neon);" viewBox="0 0 24 24">
+          <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
+        <input type="text" id="search-input-field" class="search-modal-input" placeholder="Search eco-products, materials, benefits (e.g. bamboo, bottle, tote)..." />
+        <button id="search-close-btn" class="btn-icon" aria-label="Close Search">&times;</button>
+      </div>
+      <div id="search-results-list" class="search-results-list"></div>
+    </div>
+  </div>
+
+  <!-- Global Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 50px 0 30px; background: var(--bg-secondary); margin-top: 80px;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="brand-icon-wrapper" style="width: 30px; height: 30px;">
+            <svg class="brand-leaf-svg" style="width: 16px; height: 16px;" viewBox="0 0 24 24">
+              <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C22 3 10 4 6.66 9.47L8.2 10.42C10.74 6.75 17 8 17 8Z"/>
+            </svg>
+          </div>
+          <span style="font-family: var(--font-display); font-weight: 800; font-size: 1.25rem;">ECOMART</span>
+        </div>
+        <div style="display: flex; gap: 24px; font-family: var(--font-display); font-size: 0.92rem; color: var(--text-secondary);">
+          <a href="index.html" style="color: inherit; text-decoration: none;">Home</a>
+          <a href="shop.html" style="color: inherit; text-decoration: none;">Marketplace</a>
+          <a href="impact.html" style="color: var(--accent-neon); text-decoration: none;">Impact Matrix</a>
+          <a href="about.html" style="color: inherit; text-decoration: none;">Philosophy</a>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-muted); border-top: 1px dashed var(--border-subtle); padding-top: 20px;">
+        <span>© 2026 ECOMART Inc. Certified B-Corporation • 100% Carbon-Neutral Digital Platform</span>
+        <span>Built for Hackathon Round 2 • Premium Dark Emerald Futurism</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/sound.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/impact.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

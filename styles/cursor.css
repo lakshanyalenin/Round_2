@@ -1,0 +1,73 @@
+/* ==========================================================================
+   ECOMART — Custom Botanical Leaf Cursor
+   ========================================================================== */
+
+/* Hide default cursor on desktop */
+@media (pointer: fine) {
+  body {
+    cursor: default;
+  }
+}
+
+.custom-cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease, transform 0.08s ease-out;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-cursor-follower.visible {
+  opacity: 1;
+}
+
+.cursor-leaf-svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--accent-neon);
+  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.75));
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.2s ease;
+  transform: rotate(-25deg);
+}
+
+.custom-cursor-follower.hovering .cursor-leaf-svg {
+  transform: rotate(15deg) scale(1.6);
+  fill: var(--accent-neon-bright);
+  filter: drop-shadow(0 0 16px rgba(0, 255, 136, 1));
+}
+
+.cursor-trail-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  box-shadow: 0 0 10px var(--accent-neon);
+  pointer-events: none;
+  z-index: calc(var(--z-cursor) - 1);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cursor-trail-dot.visible {
+  opacity: 0.8;
+}
+
+/* Disable completely on mobile & touch devices */
+@media (pointer: coarse), (hover: none) {
+  .custom-cursor-follower,
+  .cursor-trail-dot {
+    display: none !important;
+  }
+}

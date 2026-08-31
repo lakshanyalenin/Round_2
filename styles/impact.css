@@ -1,0 +1,363 @@
+/* ==========================================================================
+   ECOMART — Impact Page, Metrics, Bottle Data HUD & Calculator
+   ========================================================================== */
+
+.impact-section {
+  padding: 50px 0 90px;
+}
+
+.impact-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 70px;
+}
+
+.impact-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.impact-hero-title {
+  font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.impact-hero-desc {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   Futuristic Bottle Sustainability Data Visualization
+   ========================================================================== */
+.impact-visualization-card {
+  background: linear-gradient(145deg, rgba(14, 30, 20, 0.9) 0%, rgba(6, 14, 9, 0.95) 100%);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(0, 255, 136, 0.12);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.bottle-hud-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 14px;
+}
+
+.bottle-hud-title {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-neon);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.bottle-hud-status {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-neon-bright);
+  background: rgba(0, 255, 136, 0.12);
+  border: 1px solid var(--border-bright);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.bottle-graphic-container {
+  position: relative;
+  width: 220px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Futuristic Glowing Bottle Shape */
+.bottle-outline-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.4));
+}
+
+.bottle-liquid-fill {
+  transition: height 1s ease-out;
+  animation: liquidWave 4s ease-in-out infinite alternate;
+}
+
+@keyframes liquidWave {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+/* Floating HUD Data Callouts */
+.bottle-callout {
+  position: absolute;
+  background: rgba(4, 10, 7, 0.88);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 14px rgba(0, 255, 136, 0.2);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 3;
+  animation: floatCallout 4s ease-in-out infinite alternate;
+}
+
+.callout-co2 {
+  top: 15%;
+  right: -50px;
+  animation-delay: 0s;
+}
+
+.callout-bottles {
+  top: 45%;
+  left: -60px;
+  animation-delay: 1.2s;
+}
+
+.callout-coverage {
+  bottom: 12%;
+  right: -40px;
+  animation-delay: 2.4s;
+}
+
+@keyframes floatCallout {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+
+.callout-num {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--accent-neon-bright);
+}
+
+.callout-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   4 Key Community Metrics Cards
+   ========================================================================== */
+.impact-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 70px;
+}
+
+.impact-stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.impact-stat-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-neon);
+  box-shadow: var(--shadow-lg), 0 0 28px rgba(0, 255, 136, 0.2);
+}
+
+.stat-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-neon);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.8vw, 3rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1.05;
+}
+
+.stat-number-accent {
+  color: var(--accent-neon-bright);
+}
+
+.stat-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.stat-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Impact Storytelling Cards (3 Cards)
+   ========================================================================== */
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 70px;
+}
+
+.story-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all var(--transition-normal);
+}
+
+.story-card:hover {
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(0, 255, 136, 0.1);
+  transform: translateY(-4px);
+}
+
+.story-pill {
+  align-self: flex-start;
+}
+
+.story-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.story-text {
+  font-size: 0.94rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   Personal Impact Calculator Widget
+   ========================================================================== */
+.calculator-card {
+  background: linear-gradient(135deg, rgba(14, 30, 20, 0.95) 0%, rgba(8, 18, 12, 0.98) 100%);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 44px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(0, 255, 136, 0.1);
+}
+
+.calc-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.calc-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.calc-slider-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.calc-slider-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.calc-slider-val {
+  font-family: var(--font-mono);
+  color: var(--accent-neon);
+  font-weight: 700;
+}
+
+.calc-right {
+  background: rgba(4, 10, 7, 0.85);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  box-shadow: var(--shadow-glow);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+
+.calc-result-number {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: var(--accent-neon-bright);
+  line-height: 1;
+}
+
+.calc-result-label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 1024px) {
+  .impact-hero-grid,
+  .calculator-card {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .callout-co2 { right: 0; }
+  .callout-bottles { left: 0; }
+  .callout-coverage { right: 0; }
+}
+
+@media (max-width: 640px) {
+  .impact-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
