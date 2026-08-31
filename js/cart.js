@@ -143,7 +143,7 @@ class CartManager {
       if (browseBtn) {
         browseBtn.addEventListener('click', () => {
           this.closeCart();
-          window.ecomartStore.setActiveTab('shop');
+          window.location.href = 'shop.html';
         });
       }
 

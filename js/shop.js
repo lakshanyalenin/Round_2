@@ -241,11 +241,11 @@ class ShopManager {
       const prodId = card.dataset.productId;
       const product = ECOMART_PRODUCTS.find(p => p.id === prodId);
 
-      // Open detail modal when clicking card body (except quick add button)
+      // Open detail page when clicking card body (except quick add button)
       card.addEventListener('click', (e) => {
         if (!e.target.closest('.quick-add-btn')) {
           if (window.soundEffects) window.soundEffects.play('click');
-          this.openProductModal(product);
+          window.location.href = `product.html?id=${prodId}`;
         }
       });
 
@@ -639,6 +639,56 @@ class ShopManager {
       relatedContainer.innerHTML = related.map(p => this.renderProductCard(p)).join('');
       this.attachCardEventListeners(relatedContainer);
     }
+  }
+
+  renderProductCard(product) {
+    return `
+      <div class="product-card" data-product-id="${product.id}">
+        <div class="product-img-wrapper">
+          <img class="product-card-img" src="${product.image}" alt="${product.name}" loading="lazy" />
+          <span class="badge badge-neon product-card-badge">${product.category}</span>
+          <div class="product-price-tag">$${product.price}</div>
+        </div>
+        <div class="product-card-info">
+          <div class="product-card-rating-row">
+            ${renderLeafScore(product.rating)}
+            <span class="badge badge-dark" style="font-size: 0.7rem;">${product.sustainabilityScore}% Eco</span>
+          </div>
+          <h3 class="product-card-name">${product.name}</h3>
+          <p class="product-card-tagline">${product.tagline}</p>
+          <div class="product-card-metric">
+            <span>🌱</span> <span>Replaces: ${product.replaces}</span>
+          </div>
+        </div>
+        <div class="product-card-actions">
+          <button class="btn btn-primary quick-add-btn" data-product-id="${product.id}" title="Quick Add">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  attachCardEventListeners(container) {
+    const store = window.ecomartStore;
+    container.querySelectorAll('.product-card').forEach(card => {
+      const prodId = card.dataset.productId;
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('.quick-add-btn')) {
+          if (window.soundEffects) window.soundEffects.play('click');
+          window.location.href = `product.html?id=${prodId}`;
+        }
+      });
+
+      const quickAddBtn = card.querySelector('.quick-add-btn');
+      if (quickAddBtn) {
+        quickAddBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (window.soundEffects) window.soundEffects.play('add-to-cart');
+          store.addToCart(prodId, 1);
+        });
+      }
+    });
   }
 }
 

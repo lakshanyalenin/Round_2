@@ -243,10 +243,17 @@ class EcomartStore {
   }
 
   // View Navigation
-  setActiveTab(tabName) {
-    if (['home', 'shop', 'impact', 'about'].includes(tabName)) {
-      this.activeTab = tabName;
-      this.notify('navigation', tabName);
+  setActiveTab(tab) {
+    this.activeTab = tab;
+    this.notify('navigation', tab);
+    const targetEl = document.getElementById(`view-${tab}`);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      if (tab === 'home') window.location.href = 'index.html';
+      else if (tab === 'shop') window.location.href = 'shop.html';
+      else if (tab === 'impact') window.location.href = 'impact.html';
+      else if (tab === 'about') window.location.href = 'about.html';
     }
   }
 }

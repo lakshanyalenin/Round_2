@@ -169,9 +169,16 @@ function initNavigation() {
   // Nav link click listeners
   [...navLinks, ...mobileNavLinks].forEach(link => {
     link.addEventListener('click', (e) => {
-      e.preventDefault();
+      const href = link.getAttribute('href');
       const target = link.dataset.target;
-      navigateTo(target);
+      if (href && !href.startsWith('#')) {
+        // Allow natural browser navigation to separate html pages
+        return;
+      }
+      if (target) {
+        e.preventDefault();
+        navigateTo(target);
+      }
     });
   });
 
@@ -352,7 +359,7 @@ function initGlobalSearch() {
         const prod = ECOMART_PRODUCTS.find(p => p.id === item.dataset.productId);
         closeSearch();
         if (prod) {
-          window.location.hash = `#/product/${prod.id}`;
+          window.location.href = `product.html?id=${prod.id}`;
         }
       });
     });
