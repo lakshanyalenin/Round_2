@@ -748,3 +748,11 @@
     display: flex;
   }
 }
+
+.footer-nav-link {
+  transition: color var(--transition-fast);
+}
+
+.footer-nav-link:hover {
+  color: var(--accent-neon) !important;
+}

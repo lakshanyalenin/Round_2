@@ -143,7 +143,8 @@ class CartManager {
       if (browseBtn) {
         browseBtn.addEventListener('click', () => {
           this.closeCart();
-          window.location.href = 'shop.html';
+          const viewShop = document.getElementById('view-shop');
+          if (viewShop) viewShop.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       }
 

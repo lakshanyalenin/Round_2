@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Setup Scroll Effects
   initScrollHeader();
 
-  // Setup Hero CTAs & Cross Links
-  initHeroActions();
+  // Setup Action Buttons & CTAs
+  initActionButtons();
 });
 
 /* ==========================================================================
@@ -77,12 +77,14 @@ function initTheme() {
 }
 
 /* ==========================================================================
-   Navigation & View Routing
+   Navigation & View Routing (Single-Page Seamless Experience)
    ========================================================================== */
 function initNavigation() {
   const store = window.ecomartStore;
   const navLinks = document.querySelectorAll('.nav-link');
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  const footerNavLinks = document.querySelectorAll('.footer-nav-link');
+  const brandLogo = document.querySelector('.brand-logo');
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const mobileDrawer = document.getElementById('mobile-nav-drawer');
 
@@ -94,118 +96,139 @@ function initNavigation() {
     });
   }
 
-  // Switch view function
-  const navigateTo = (route) => {
+  // Switch/scroll view function
+  const scrollToSection = (targetId) => {
     if (window.soundEffects) window.soundEffects.play('click');
-
-    // Handle product detail route: product/:id
-    if (route.startsWith('product/') || route.startsWith('/product/')) {
-      const prodId = route.replace(/^\/?product\//, '');
-      const prod = ECOMART_PRODUCTS.find(p => p.id === prodId) || ECOMART_PRODUCTS[0];
-      
-      store.setActiveTab('product');
-
-      // Update active nav links (keep shop active)
-      navLinks.forEach(link => link.classList.toggle('active', link.dataset.target === 'shop'));
-      mobileNavLinks.forEach(link => link.classList.toggle('active', link.dataset.target === 'shop'));
-      if (mobileDrawer) mobileDrawer.classList.remove('open');
-
-      // Hide landing sections and show dedicated product page
-      ['view-home', 'view-shop', 'view-impact', 'view-about'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.classList.add('hidden');
-      });
-      const prodSec = document.getElementById('view-product');
-      if (prodSec) prodSec.classList.remove('hidden');
-
-      if (window.shopManager) {
-        window.shopManager.renderProductPage(prod);
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      history.replaceState(null, '', `#/product/${prod.id}`);
-      return;
-    }
-
-    const tabName = route.replace(/^\/?/, '') || 'home';
-    store.setActiveTab(tabName);
-
-    // Unhide main landing sections
-    ['view-home', 'view-shop', 'view-impact', 'view-about'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.classList.remove('hidden');
-    });
-    const prodSec = document.getElementById('view-product');
-    if (prodSec) prodSec.classList.add('hidden');
+    const tabName = (targetId || '').replace(/^#?\/?(view-)?/, '') || 'home';
+    const targetEl = document.getElementById(`view-${tabName}`) || document.getElementById(tabName) || document.getElementById('view-home');
 
     // Update active nav links
-    navLinks.forEach(link => {
-      link.classList.toggle('active', link.dataset.target === tabName);
-    });
+    navLinks.forEach(link => link.classList.toggle('active', link.dataset.target === tabName));
+    mobileNavLinks.forEach(link => link.classList.toggle('active', link.dataset.target === tabName));
 
-    mobileNavLinks.forEach(link => {
-      link.classList.toggle('active', link.dataset.target === tabName);
-    });
-
-    // Close mobile drawer if open
     if (mobileDrawer) mobileDrawer.classList.remove('open');
 
-    // Smooth scroll to target section
-    const targetEl = document.getElementById(`view-${tabName}`);
     if (targetEl) {
       targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-
-    // Sync hash
-    history.replaceState(null, '', tabName === 'home' ? '#/' : `#/${tabName}`);
   };
 
-  // Back to marketplace button
-  const backBtn = document.getElementById('product-page-back-btn');
-  if (backBtn) {
-    backBtn.addEventListener('click', () => navigateTo('shop'));
-  }
-
   // Nav link click listeners
-  [...navLinks, ...mobileNavLinks].forEach(link => {
+  [...navLinks, ...mobileNavLinks, ...footerNavLinks].forEach(link => {
     link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-      const target = link.dataset.target;
-      if (href && !href.startsWith('#')) {
-        // Allow natural browser navigation to separate html pages
-        return;
-      }
-      if (target) {
-        e.preventDefault();
-        navigateTo(target);
-      }
+      e.preventDefault();
+      const target = link.dataset.target || link.getAttribute('href');
+      scrollToSection(target);
     });
   });
 
-  // Subscribe to navigation events
+  if (brandLogo) {
+    brandLogo.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToSection('home');
+    });
+  }
+
+  // Subscribe to store navigation events
   store.subscribe((event, tabName) => {
     if (event === 'navigation') {
-      navigateTo(tabName);
+      scrollToSection(tabName);
     }
   });
 
-  // Hash route resolver
-  const resolveCurrentHash = () => {
-    let hash = window.location.hash.replace(/^#\/?/, '');
-    if (!hash || hash === '') hash = 'home';
+  // ScrollSpy to update active nav indicator automatically on scroll
+  const sections = ['home', 'shop', 'impact', 'about'].map(id => document.getElementById(`view-${id}`)).filter(Boolean);
+  if ('IntersectionObserver' in window && sections.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const tab = entry.target.id.replace('view-', '');
+          navLinks.forEach(l => l.classList.toggle('active', l.dataset.target === tab));
+          mobileNavLinks.forEach(l => l.classList.toggle('active', l.dataset.target === tab));
+        }
+      });
+    }, { threshold: 0.35 });
 
-    if (hash.startsWith('product/')) {
-      navigateTo(hash);
-    } else if (['home', 'shop', 'impact', 'about'].includes(hash)) {
-      navigateTo(hash);
-    } else {
-      navigateTo('home');
-    }
-  };
+    sections.forEach(sec => observer.observe(sec));
+  }
+}
 
-  // Check initial URL hash and listen to changes
-  resolveCurrentHash();
-  window.addEventListener('hashchange', resolveCurrentHash);
+/* ==========================================================================
+   Action Buttons (Hero, Platform 12, Impact Calculator, Mobile Drawer)
+   ========================================================================== */
+function initActionButtons() {
+  // Hero explore button -> smooth-scrolls to #view-shop
+  const heroExploreBtn = document.getElementById('hero-explore-btn');
+  if (heroExploreBtn) {
+    heroExploreBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const viewShop = document.getElementById('view-shop');
+      if (viewShop) viewShop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  // Hero impact button -> smooth-scrolls to #view-impact
+  const heroImpactBtn = document.getElementById('hero-impact-btn');
+  if (heroImpactBtn) {
+    heroImpactBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const viewImpact = document.getElementById('view-impact');
+      if (viewImpact) viewImpact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  // Hero Quick Add to Cart button (Insulated Steel Bottle)
+  const heroAddBtn = document.getElementById('hero-card-add-btn') || document.getElementById('hero-steel-quick-add');
+  if (heroAddBtn) {
+    heroAddBtn.addEventListener('click', () => {
+      if (window.soundEffects) window.soundEffects.play('add-to-cart');
+      window.ecomartStore.addToCart('prod-02', 1);
+    });
+  }
+
+  // Hero Inspect Specs button -> opens modal
+  const heroInspectBtn = document.getElementById('hero-card-inspect-btn');
+  if (heroInspectBtn) {
+    heroInspectBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const prod = ECOMART_PRODUCTS.find(p => p.id === 'prod-02');
+      if (window.shopManager && prod) {
+        window.shopManager.openProductModal(prod);
+      }
+    });
+  }
+
+  // Platform 12 Browse Now button -> smooth-scrolls to #view-shop
+  const browseBtn = document.getElementById('browse-now-btn') || document.getElementById('platform-browse-now-btn');
+  if (browseBtn) {
+    browseBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const viewShop = document.getElementById('view-shop');
+      if (viewShop) viewShop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  // Impact Calculator "Start Swapping Today" button -> smooth-scrolls to #view-shop
+  const calcShopBtn = document.getElementById('calc-shop-btn');
+  if (calcShopBtn) {
+    calcShopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const viewShop = document.getElementById('view-shop');
+      if (viewShop) viewShop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  // Mobile Drawer Explore Products button
+  const mobileExploreBtn = document.getElementById('mobile-explore-btn');
+  if (mobileExploreBtn) {
+    mobileExploreBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const drawer = document.getElementById('mobile-nav-drawer');
+      if (drawer) drawer.classList.remove('open');
+      const viewShop = document.getElementById('view-shop');
+      if (viewShop) viewShop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 }
 
 /* ==========================================================================
@@ -216,14 +239,13 @@ function initCountdown() {
   const minEl = document.getElementById('countdown-min');
   const secEl = document.getElementById('countdown-sec');
 
-  // Calculate target countdown 14 hours ahead from now
   let remainingSeconds = (14 * 3600) + (38 * 60) + 24;
 
   const updateCountdown = () => {
     if (remainingSeconds > 0) {
       remainingSeconds--;
     } else {
-      remainingSeconds = 24 * 3600; // loop
+      remainingSeconds = 24 * 3600;
     }
 
     const hours = Math.floor(remainingSeconds / 3600);
@@ -237,52 +259,6 @@ function initCountdown() {
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
-
-  // Platform 12 "Browse Now" button
-  const browseBtn = document.getElementById('browse-now-btn');
-  if (browseBtn) {
-    browseBtn.addEventListener('click', () => {
-      const viewShop = document.getElementById('view-shop');
-      if (viewShop) {
-        viewShop.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.location.href = 'shop.html';
-      }
-    });
-  }
-
-  // Hero explore and impact buttons
-  const heroExploreBtn = document.getElementById('hero-explore-btn');
-  if (heroExploreBtn) {
-    heroExploreBtn.addEventListener('click', () => {
-      const viewShop = document.getElementById('view-shop');
-      if (viewShop) {
-        viewShop.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.location.href = 'shop.html';
-      }
-    });
-  }
-
-  const heroImpactBtn = document.getElementById('hero-impact-btn');
-  if (heroImpactBtn) {
-    heroImpactBtn.addEventListener('click', () => {
-      const viewImpact = document.getElementById('view-impact');
-      if (viewImpact) {
-        viewImpact.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.location.href = 'impact.html';
-      }
-    });
-  }
-
-  const heroSteelAddBtn = document.getElementById('hero-steel-quick-add');
-  if (heroSteelAddBtn) {
-    heroSteelAddBtn.addEventListener('click', () => {
-      if (window.soundEffects) window.soundEffects.play('add-to-cart');
-      window.ecomartStore.addToCart('prod-02', 1);
-    });
-  }
 }
 
 /* ==========================================================================
@@ -358,8 +334,8 @@ function initGlobalSearch() {
       item.addEventListener('click', () => {
         const prod = ECOMART_PRODUCTS.find(p => p.id === item.dataset.productId);
         closeSearch();
-        if (prod) {
-          window.location.href = `product.html?id=${prod.id}`;
+        if (prod && window.shopManager) {
+          window.shopManager.openProductModal(prod);
         }
       });
     });

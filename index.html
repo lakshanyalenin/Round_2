@@ -50,10 +50,10 @@
 
         <!-- Desktop Navigation Links -->
         <ul class="nav-links">
-          <li><a href="index.html" class="nav-link active" data-target="home">Home</a></li>
-          <li><a href="shop.html" class="nav-link" data-target="shop">Shop</a></li>
-          <li><a href="impact.html" class="nav-link" data-target="impact">Impact</a></li>
-          <li><a href="about.html" class="nav-link" data-target="about">About</a></li>
+          <li><a href="#view-home" class="nav-link active" data-target="home">Home</a></li>
+          <li><a href="#view-shop" class="nav-link" data-target="shop">Shop</a></li>
+          <li><a href="#view-impact" class="nav-link" data-target="impact">Impact</a></li>
+          <li><a href="#view-about" class="nav-link" data-target="about">About</a></li>
         </ul>
 
         <!-- Nav Actions -->
@@ -103,12 +103,12 @@
     <!-- Mobile Drawer -->
     <div id="mobile-nav-drawer" class="mobile-nav-drawer">
       <ul class="mobile-nav-links">
-        <li><a class="mobile-nav-link active" data-target="home">Home</a></li>
-        <li><a class="mobile-nav-link" data-target="shop">Shop Marketplace</a></li>
-        <li><a class="mobile-nav-link" data-target="impact">Impact & Metrics</a></li>
-        <li><a class="mobile-nav-link" data-target="about">Sustainability Philosophy</a></li>
+        <li><a href="#view-home" class="mobile-nav-link active" data-target="home">Home</a></li>
+        <li><a href="#view-shop" class="mobile-nav-link" data-target="shop">Shop Marketplace</a></li>
+        <li><a href="#view-impact" class="mobile-nav-link" data-target="impact">Impact & Metrics</a></li>
+        <li><a href="#view-about" class="mobile-nav-link" data-target="about">Sustainability Philosophy</a></li>
       </ul>
-      <button class="btn btn-primary" style="margin-top: auto;" onclick="window.ecomartStore.setActiveTab('shop')">
+      <button id="mobile-explore-btn" class="btn btn-primary" style="margin-top: auto;">
         Explore Products
       </button>
     </div>
@@ -137,12 +137,12 @@
               Ecomart helps modern pioneers make sustainable everyday swaps without compromising style, quality, or convenience. Every product is audited, 5-leaf scored, and delivered 100% carbon-neutral.
             </p>
             <div class="hero-cta-group">
-              <a href="shop.html" id="hero-explore-btn" class="btn btn-primary btn-pill" style="text-decoration: none;">
+              <button id="hero-explore-btn" class="btn btn-primary btn-pill">
                 Explore Marketplace →
-              </a>
-              <a href="impact.html" id="hero-impact-btn" class="btn btn-secondary btn-pill" style="text-decoration: none;">
+              </button>
+              <button id="hero-impact-btn" class="btn btn-secondary btn-pill">
                 View Live Impact
-              </a>
+              </button>
             </div>
 
             <!-- Live Status Ticker -->
@@ -197,11 +197,11 @@
                   <button id="hero-card-add-btn" class="btn btn-primary">
                     Quick Add to Cart
                   </button>
-                  <a href="product.html?id=prod-02" id="hero-card-inspect-btn" class="btn btn-secondary btn-icon" title="Inspect Specifications" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">
+                  <button id="hero-card-inspect-btn" class="btn btn-secondary btn-icon" title="Inspect Specifications">
                     <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24">
                       <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
                     </svg>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -308,9 +308,9 @@
             </div>
 
             <!-- Browse Now CTA Button -->
-            <a href="shop.html" id="browse-now-btn" class="btn btn-primary platform-cta-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+            <button id="browse-now-btn" class="btn btn-primary platform-cta-btn">
               Browse Now →
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -726,7 +726,7 @@
                 <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent-neon); text-transform: uppercase;">Tree Equivalents</div>
               </div>
             </div>
-            <button class="btn btn-primary" onclick="window.ecomartStore.setActiveTab('shop')" style="margin-top: 6px;">
+            <button id="calc-shop-btn" class="btn btn-primary" style="margin-top: 6px;">
               Start Swapping Today
             </button>
           </div>
@@ -850,8 +850,8 @@
         <svg style="width: 22px; height: 22px; fill: var(--accent-neon);" viewBox="0 0 24 24">
           <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
         </svg>
-        <input type="text" id="search-input-field" class="search-input-field" placeholder="Search 12 sustainable products (e.g. bamboo, bottle)..." />
-        <button id="search-close-btn" class="search-close-btn" aria-label="Close search">&times;</button>
+        <input type="text" id="search-input-field" class="search-modal-input" placeholder="Search eco-products, materials, benefits (e.g. bamboo, bottle, tote)..." />
+        <button id="search-close-btn" class="search-close-btn" aria-label="Close Search">&times;</button>
       </div>
       <div id="search-results-list" class="search-results-list"></div>
     </div>
@@ -981,10 +981,10 @@
           <span style="font-family: var(--font-display); font-weight: 800; font-size: 1.25rem;">ECOMART</span>
         </div>
         <div style="display: flex; gap: 24px; font-family: var(--font-display); font-size: 0.92rem; color: var(--text-secondary);">
-          <a href="#home" onclick="window.ecomartStore.setActiveTab('home')" style="color: inherit; text-decoration: none;">Home</a>
-          <a href="#shop" onclick="window.ecomartStore.setActiveTab('shop')" style="color: inherit; text-decoration: none;">Marketplace</a>
-          <a href="#impact" onclick="window.ecomartStore.setActiveTab('impact')" style="color: inherit; text-decoration: none;">Impact Matrix</a>
-          <a href="#about" onclick="window.ecomartStore.setActiveTab('about')" style="color: inherit; text-decoration: none;">Philosophy</a>
+          <a href="#view-home" class="footer-nav-link" data-target="home" style="color: inherit; text-decoration: none;">Home</a>
+          <a href="#view-shop" class="footer-nav-link" data-target="shop" style="color: inherit; text-decoration: none;">Marketplace</a>
+          <a href="#view-impact" class="footer-nav-link" data-target="impact" style="color: inherit; text-decoration: none;">Impact Matrix</a>
+          <a href="#view-about" class="footer-nav-link" data-target="about" style="color: inherit; text-decoration: none;">Philosophy</a>
         </div>
       </div>
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-muted); border-top: 1px dashed var(--border-subtle); padding-top: 20px;">

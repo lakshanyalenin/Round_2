@@ -241,11 +241,11 @@ class ShopManager {
       const prodId = card.dataset.productId;
       const product = ECOMART_PRODUCTS.find(p => p.id === prodId);
 
-      // Open detail page when clicking card body (except quick add button)
+      // Open detail modal when clicking card body (except quick add button)
       card.addEventListener('click', (e) => {
         if (!e.target.closest('.quick-add-btn')) {
           if (window.soundEffects) window.soundEffects.play('click');
-          window.location.href = `product.html?id=${prodId}`;
+          if (product) this.openProductModal(product);
         }
       });
 
@@ -673,10 +673,11 @@ class ShopManager {
     const store = window.ecomartStore;
     container.querySelectorAll('.product-card').forEach(card => {
       const prodId = card.dataset.productId;
+      const product = ECOMART_PRODUCTS.find(p => p.id === prodId);
       card.addEventListener('click', (e) => {
         if (!e.target.closest('.quick-add-btn')) {
           if (window.soundEffects) window.soundEffects.play('click');
-          window.location.href = `product.html?id=${prodId}`;
+          if (product) this.openProductModal(product);
         }
       });
 

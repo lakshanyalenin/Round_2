@@ -83,7 +83,10 @@ class FeaturedCarousel {
 
     this.slidesWrapper.querySelectorAll('.carousel-inspect-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        window.location.href = `product.html?id=${btn.dataset.productId}`;
+        const prod = ECOMART_PRODUCTS.find(p => p.id === btn.dataset.productId);
+        if (window.shopManager && prod) {
+          window.shopManager.openProductModal(prod);
+        }
       });
     });
   }
